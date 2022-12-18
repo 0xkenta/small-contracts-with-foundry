@@ -17,8 +17,8 @@ contract Eip712WithNonceTest is Test {
         "EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)"
     );
     bytes32 DOMAIN_SEPARATER;
-    bytes32 constant TEST__TYPEHASH = keccak256(
-        "TestRequest(address _address, uint256 _tokenId, string calldate _paymentId)"
+    bytes32 constant PAYMENT_REQUEST_TYPEHASH = keccak256(
+        "PaymentRequest(address _address, uint256 _tokenId, string calldate _paymentId)"
     );
 
     function setUp() public {
@@ -51,7 +51,7 @@ contract Eip712WithNonceTest is Test {
 
     function _usePaymentId() internal returns (bool) {
         bytes32 digest = ECDSA.toTypedDataHash(DOMAIN_SEPARATER, (keccak256(abi.encode(
-           TEST__TYPEHASH,
+           PAYMENT_REQUEST_TYPEHASH,
            user1,
            1,
            keccak256(bytes("12345"))

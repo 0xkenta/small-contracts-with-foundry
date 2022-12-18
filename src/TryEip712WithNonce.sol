@@ -4,9 +4,6 @@ import './Eip712WithNonce.sol';
 
 contract TryEip712WithNonce is Eip712WithNonce {
     address immutable admin;
-    bytes32 constant TEST__TYPEHASH = keccak256(
-        "TestRequest(address _address, uint256 _tokenId, string calldate _paymentId)"
-    );
 
     constructor(
         string memory _name, 
@@ -20,7 +17,7 @@ contract TryEip712WithNonce is Eip712WithNonce {
         require(!usedPaymentId[_paymentId], "PAYMENT ID HAS BEEN ALREADY USED");
 
         bytes32 digest = _hashTypedDataV4(keccak256(abi.encode(
-           TEST__TYPEHASH,
+           PAYMENT_REQUEST_TYPEHASH,
            _address,
            _tokenId,
            keccak256(bytes(_paymentId)

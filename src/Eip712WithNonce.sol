@@ -5,9 +5,13 @@ import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 
 contract Eip712WithNonce {
 
-    bytes32 private TYPE_HASH = keccak256(
+    bytes32 constant TYPE_HASH = keccak256(
         "EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)"
     );
+    bytes32 constant PAYMENT_REQUEST_TYPEHASH = keccak256(
+        "PaymentRequest(address _address, uint256 _tokenId, string calldate _paymentId)"
+    );
+
     bytes32 private HASHED_NAME;
     bytes32 private HASHED_VERSION;
 
