@@ -3,15 +3,11 @@ pragma solidity 0.8.13;
 import './Eip712WithNonce.sol';
 
 contract TryEip712WithNonce is Eip712WithNonce {
-    address immutable admin;
-
     constructor(
         string memory _name, 
         string memory _version,
         address _admin
-    ) Eip712WithNonce(_name, _version) {
-        admin = _admin;
-    }
+    ) Eip712WithNonce(_name, _version, _admin) {}
 
     function usePaymentId(address _address, uint256 _tokenId, string calldata _paymentId, bytes memory _signature) external returns (bool) {
         require(!usedPaymentId[_paymentId], "PAYMENT ID HAS BEEN ALREADY USED");

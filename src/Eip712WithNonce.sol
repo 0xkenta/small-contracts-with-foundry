@@ -4,6 +4,8 @@ import "@openzeppelin/contracts/utils/cryptography/EIP712.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 
 contract Eip712WithNonce {
+    bytes32 private HASHED_NAME;
+    bytes32 private HASHED_VERSION;
 
     bytes32 constant TYPE_HASH = keccak256(
         "EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)"
@@ -12,16 +14,18 @@ contract Eip712WithNonce {
         "PaymentRequest(address _address, uint256 _tokenId, string calldate _paymentId)"
     );
 
-    bytes32 private HASHED_NAME;
-    bytes32 private HASHED_VERSION;
+    address immutable admin;
 
     mapping (string => bool) internal usedPaymentId;
 
-    constructor(string memory name, string memory version) {
+    constructor(string memory name, string memory version, address _admin) {
         bytes32 hashedName = keccak256(bytes(name));
         bytes32 hashedVersion = keccak256(bytes(version));
+        
         HASHED_NAME = hashedName;
         HASHED_VERSION = hashedVersion;
+
+        admin = _admin;
     }
 
     function _domainSeparatorV4() internal view returns (bytes32) {
