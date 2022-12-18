@@ -3,8 +3,9 @@ pragma solidity 0.8.13;
 import './Eip712WithNonce.sol';
 
 contract TryEip712WithNonce is Eip712WithNonce {
+    
     constructor(
-        string memory _name, 
+        string memory _name,
         string memory _version,
         address _admin
     ) Eip712WithNonce(_name, _version, _admin) {}
@@ -25,5 +26,5 @@ contract TryEip712WithNonce is Eip712WithNonce {
         usedPaymentId[_paymentId] = true;
 
         return true;
-    }     
+    }
 }
