@@ -53,7 +53,7 @@ contract TryDynamicNFTTest is Test {
         assertEq(_artist, _expectedArtist);
     }
 
-    function _getLog(uint256 _tokenId) private {
+    function _getLog(uint256 _tokenId) private view {
         string memory result = nft.tokenURI(_tokenId);
         console.log(result);
     }
