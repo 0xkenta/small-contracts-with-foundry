@@ -6,7 +6,9 @@ import "../TryMultiCall.sol";
 
 contract TryMultiCallTest is DSTest {
     TryMultiCall tryMultiCall;
+
     function setUp() public {
+        
         tryMultiCall = new TryMultiCall();
     }
 
