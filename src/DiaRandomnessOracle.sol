@@ -6,14 +6,14 @@ interface IDIARandomOracle {
 }
 
 contract DiaRandomnessOracle {
-    address diaRandomOracle;
+    IDIARandomOracle diaRandomOracle;
 
     constructor(address _diaRandomOracle) {
-        diaRandomOracle = _diaRandomOracle;
+        diaRandomOracle = IDIARandomOracle(_diaRandomOracle);
     }
     function getRandomValue() external view returns (uint256) {
-        uint256 lastRound = IDIARandomOracle(diaRandomOracle).getLastRound();
-        string memory rand = IDIARandomOracle(diaRandomOracle).getRandomValueFromRound(lastRound);
+        uint256 lastRound = diaRandomOracle.getLastRound();
+        string memory rand = diaRandomOracle.getRandomValueFromRound(lastRound);
         return uint256(keccak256(abi.encodePacked(rand)));
     }
 }
